@@ -1,0 +1,57 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+  <div class="taskNotCompleted">
+    {% for todo in todo_list %}
+    {% if not todo.completed %}
+    <div class="row my-2 justify-content-center">
+      <span class="task_label col-1">Task</span>
+      <div class="task col-8">
+        <span>{{todo.task|title}}</span>
+      </div>
+      <div class="row">
+        <a class="task_option1 col-1" href="{% url 'todo:taskComplete' pk=todo.id %}">
+          <i class="fa fa-check" aria-hidden='true'></i>
+        </a>
+        <a class="task_option1 col-1" href="{% url 'todo:taskUpdate' pk=todo.id %}">
+          <i class="fa fa-pencil" aria-hidden='true'></i>
+        </a>
+        <a class="task_option2 col-1" href="{% url 'todo:taskDelete' pk=todo.id %}">
+          <i class="fa fa-trash" aria-hidden='true'></i>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="taskCompleted">
+    <h1>Completed</h1>
+    {% for todo in todo_list %}
+    {% if todo.completed %}
+    <div class="row my-2 justify-content-center">
+      <span class="task_label col-1">Task</span>
+      <div class="task col-8">
+        <span>{{todo.task|title}}</span>
+      </div>
+      <div class="row">
+        <a class="task_option1 col-1" href="{% url 'todo:taskNotComplete' pk=todo.id %}">
+          <i class="fa fa-times" aria-hidden='true'></i>
+        </a>
+        <a class="task_option1 col-1" href="{% url 'todo:taskUpdate' pk=todo.id %}">
+          <i class="fa fa-pencil" aria-hidden='true'></i>
+        </a>
+        <a class="task_option2 col-1" href="{% url 'todo:taskDelete' pk=todo.id %}">
+          <i class="fa fa-trash" aria-hidden='true'></i>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+<script type="text/javascript">
+  let totTask = {{todo_list.count}}
+  let taskDone = {{taskCompleted}}
+</script>
+{% endblock %}

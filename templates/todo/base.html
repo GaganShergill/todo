@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Varela+Round&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'master.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark px-5">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'todo:taskList' %}">
+            <img src="{% static 'images/home.png' %}" alt="">
+          </a>
+        </li>
+        <form class="form-inline my-2 mx-4 my-lg-0">
+          <div class="searchbar">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input id="search" class="form-control mr-sm-2" type="search" placeholder="Find" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+          </div>
+        </form>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active mr-2">
+          <a class="nav-link" href="{% url 'todo:taskAdd' %}">
+            <img src="{% static 'images/plus.png' %}" alt="">
+          </a>
+        </li>
+        <li class="nav-item active mr-2">
+          <canvas id="myChart" width="42" height="42"></canvas>
+        </li>
+        <li class="nav-item active mr-2">
+          <span id="taskStatus"></span>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            <img src="{% static 'images/logout.png' %}" alt="">
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="mx-5 mt-4 row">
+      <div class="col-2 options">
+
+        <a class="option today mt-4" href="{% url 'todo:taskList' %}">
+          <div class="today_calendar mr-2">
+            <div class="calendar_header"></div>
+            <div id="calendar_date"></div>
+          </div>
+          <span>Today</span>
+        </a>
+
+        <a class="option completed mt-5" href="{% url 'todo:taskList' %}">
+          <i class="fa fa-calendar-check-o check_calendar mx-1" aria-hidden="true"></i>
+          <span>Completed</span>
+        </a>
+
+        <a class="option dates mt-5" href="{% url 'todo:taskList' %}">
+          <i class="fa fa-calendar dates_calendar mx-1" aria-hidden="true"></i>
+          <span>Calendar</span>
+        </a>
+      </div>
+
+      <div class="col-6 mx-auto">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script type="text/javascript" src="{% static 'myscript.js' %}"></script>
+  </body>
+</html>

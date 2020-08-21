@@ -1,0 +1,15 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <span class="task_label col-2">Delete Task?</span>
+      <span class="task col-8 rounded-right">{{object|title}}</span>
+    </div>
+    <div class="mt-5 col-10 text-right">
+      <input class="btn btn-success" type="submit" value="Confirm">
+      <a class="btn btn-primary" href="{% url 'todo:taskList' %}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

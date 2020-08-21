@@ -1,0 +1,10 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+  <form class="form-group" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-success" type="submit" value="Submit">
+    <a class="btn btn-primary" href="{% url 'todo:taskList' %}">Cancel</a>
+  </form>
+{% endblock %}
